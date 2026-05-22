@@ -76,6 +76,7 @@
     display: flex;
     gap: 15px;
     overflow-x: auto;
+    overflow-y: hidden;
     height: 110px;
 }
 

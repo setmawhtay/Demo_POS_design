@@ -1,64 +1,57 @@
-// $(function () {
+document.addEventListener("DOMContentLoaded", async () => {
 
-//     $("#header").load("/includes/header.html", function () {
-//         $("#menuToggle").click(function () {
-//             $(".main-nav").toggleClass("show");
-//         });
+    // LOAD HEADER
+    const header = document.getElementById("header");
 
-//     });
+    if (header) {
 
-//     $("#footer").load("/includes/footer.html");
+        const headerResponse = await fetch("../includes/header.html");
 
-// });
+        const headerHtml = await headerResponse.text();
 
-$(function () {
-    $("#header").load("/includes/header.html", function () {
+        header.innerHTML = headerHtml;
+
         // MENU TOGGLE
-        $("#menuToggle").click(function () {
-            $(".main-nav").toggleClass("show");
-        });
-        
-        // Set active class for navigation links after header is loaded
-        setActiveNavLinks();
-    });
+        const menuToggle = document.getElementById("menuToggle");
 
-    $("#footer").load("/includes/footer.html", function () {
-        // Set active class for mobile nav in footer after loaded
-        setActiveNavLinks();
-    });
-    
-    // Function to set active class on both PC and mobile navigation links
-    function setActiveNavLinks() {
-        let currentPage = window.location.pathname.split("/").pop();
-        
-        // Default to home.html if empty
-        if (currentPage === "" || currentPage === "mypage" || currentPage === "/") {
-            currentPage = "home.html";
+        if (menuToggle) {
+            menuToggle.addEventListener("click", () => {
+                document.querySelector(".main-nav").classList.toggle("show");
+            });
         }
-        
-        // Handle PC navigation links (.main-nav a)
-        $(".main-nav a").each(function() {
-            let linkHref = $(this).attr("href");
-            // Extract filename from href
-            let linkPage = linkHref ? linkHref.split("/").pop() : "";
-            
-            if (linkPage === currentPage) {
+
+         initNavigation();
+    }
+
+    // LOAD FOOTER
+    const footer = document.getElementById("footer");
+
+    if (footer) {
+
+        const footerResponse = await fetch("../includes/footer.html");
+
+        const footerHtml = await footerResponse.text();
+
+        footer.innerHTML = footerHtml;
+    }
+
+    // ACTIVE NAVIGATION
+     function initNavigation() {
+
+        let currentPage = window.location.pathname.split("/").pop();
+
+        if (!currentPage) currentPage = "home.html";
+
+        // reset ALL states
+        $(".main-nav a, .mobile-nav a").removeClass("active");
+
+        // re-apply active state
+        $(".main-nav a, .mobile-nav a").each(function () {
+
+            let link = $(this).attr("href").split("/").pop();
+
+            if (link === currentPage) {
                 $(this).addClass("active");
-            } else {
-                $(this).removeClass("active");
-            }
-        });
-        
-        // Handle mobile navigation links (.mobile-nav a)
-        $(".mobile-nav a").each(function() {
-            let linkHref = $(this).attr("href");
-            // Extract filename from href
-            let linkPage = linkHref ? linkHref.split("/").pop() : "";
-            
-            if (linkPage === currentPage) {
-                $(this).addClass("active");
-            } else {
-                $(this).removeClass("active");
             }
         });
     }

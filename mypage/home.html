@@ -1,101 +1,93 @@
 <!doctype html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Elephant Mall</title>
 
     <!-- BOOTSTRAP CSS -->
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
 
     <!-- FONT AWESOME -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap"
-      rel="stylesheet"
-    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap" rel="stylesheet" />
 
     <link rel="stylesheet" href="../css/home.css" />
     <link rel="stylesheet" href="../css/common.css" />
-  </head>
+</head>
 
-  <body>
+<body>
     <!-- HEADER -->
     <div id="header"></div>
 
     <!-- HERO -->
     <div class="hero">
-      <div class="slider" id="slider">
-        <div class="slide active">
-          <img src="../image/banner1.avif" />
-          <div class="hero-text">
-            <h1>YANGON SUMMER HEATWAVE SAVINGS!</h1>
-            <p>Cool styles for Yangon’s hottest days.</p>
-            <button class="shop-btn">SHOP NOW</button>
-          </div>
-        </div>
+        <div class="slider" id="slider">
+            <div class="slide active">
+                <img src="../image/banner1.avif" />
+                <div class="hero-text">
+                    <h1>YANGON SUMMER HEATWAVE SAVINGS!</h1>
+                    <p>Cool styles for Yangon’s hottest days.</p>
+                    <button class="shop-btn">SHOP NOW</button>
+                </div>
+            </div>
 
-        <div class="slide">
-          <img src="../image/banner2.avif" />
-          <div class="hero-text">
-            <h1>NEW ARRIVALS</h1>
-            <p>Discover latest fashion trends.</p>
-            <button class="shop-btn">SHOP NOW</button>
-          </div>
-        </div>
+            <div class="slide">
+                <img src="../image/banner2.avif" />
+                <div class="hero-text">
+                    <h1>NEW ARRIVALS</h1>
+                    <p>Discover latest fashion trends.</p>
+                    <button class="shop-btn">SHOP NOW</button>
+                </div>
+            </div>
 
-        <div class="slide">
-          <img src="../image/banner3.avif" />
-          <div class="hero-text">
-            <h1>BIG SALE 50% OFF</h1>
-            <p>Don’t miss the best deals.</p>
-            <button class="shop-btn">SHOP NOW</button>
-          </div>
+            <div class="slide">
+                <img src="../image/banner3.avif" />
+                <div class="hero-text">
+                    <h1>BIG SALE 50% OFF</h1>
+                    <p>Don’t miss the best deals.</p>
+                    <button class="shop-btn">SHOP NOW</button>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
 
     <!-- MOBILE PROMO BANNERS -->
     <div class="mobile-promos">
-      <div class="promo-card">
-        <img src="../image/promotion-banner.png" alt="promo1" />
-      </div>
+        <div class="promo-card">
+            <img src="../image/promotion-banner.png" alt="promo1" />
+        </div>
 
-      <div class="promo-card">
-        <img src="../image/promotion-banner2.png" alt="promo2" />
-      </div>
+        <div class="promo-card">
+            <img src="../image/promotion-banner2.png" alt="promo2" />
+        </div>
     </div>
 
     <!-- CATEGORIES -->
     <div class="section">
-      <h3>TRENDING CATEGORIES</h3>
-      <br />
+        <h3>TRENDING CATEGORIES</h3>
+        <br />
 
-      <div class="category-wrapper">
-        <button class="arrow left" id="catLeft">❮</button>
-        <div class="categories" id="categoryList"></div>
+        <div class="category-wrapper">
+            <button class="arrow left" id="catLeft">❮</button>
+            <div class="categories" id="categoryList"></div>
 
-        <button class="arrow right" id="catRight">❯</button>
-      </div>
+            <button class="arrow right" id="catRight">❯</button>
+        </div>
     </div>
 
     <div class="section">
-      <h3>Trending Now in Yangon</h3>
+        <h3>Trending Now in YANGON</h3>
 
-      <div class="product-wrapper">
-        <button class="arrow left" id="proLeft">❮</button>
-        <div class="products" id="productList">
-          <!-- JS will render here -->
+        <div class="product-wrapper">
+            <button class="arrow left" id="proLeft">❮</button>
+            <div class="products" id="productList">
+                <!-- JS will render here -->
+            </div>
+
+            <button class="arrow right" id="proRight">❯</button>
         </div>
-
-        <button class="arrow right" id="proRight">❯</button>
-      </div>
     </div>
     <!-- FOOTER -->
     <div id="footer"></div>
@@ -104,116 +96,106 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="../js/include.js"></script>
     <script>
-      $(document).ready(function () {
-        /* ACTIVE NAV */
-        let currentPage = window.location.pathname.split("/").pop();
+        $(document).ready(function () {
 
-        if (currentPage === "") currentPage = "home.html";
+            /* HERO SLIDER */
+            let slides = $(".slide");
+            let index = 0;
 
-        $(".main-nav a, .mobile-nav a").each(function () {
-          if ($(this).attr("href") === currentPage) {
-            $(this).addClass("active");
-          }
-        });
+            setInterval(function () {
+                slides.removeClass("active");
 
-        /* HERO SLIDER */
-        let slides = $(".slide");
-        let index = 0;
+                index = (index + 1) % slides.length;
 
-        setInterval(function () {
-          slides.removeClass("active");
+                $(slides[index]).addClass("active");
+            }, 3000);
 
-          index = (index + 1) % slides.length;
+            /* CATEGORY SCROLL */
+            $("#catLeft").click(function () {
+                $("#categoryList").animate(
+                    {
+                        scrollLeft: $("#categoryList").scrollLeft() - 120,
+                    },
+                    400,
+                );
+            });
 
-          $(slides[index]).addClass("active");
-        }, 3000);
+            $("#catRight").click(function () {
+                $("#categoryList").animate(
+                    {
+                        scrollLeft: $("#categoryList").scrollLeft() + 120,
+                    },
+                    400,
+                );
+            });
 
-        /* CATEGORY SCROLL */
-        $("#catLeft").click(function () {
-          $("#categoryList").animate(
-            {
-              scrollLeft: $("#categoryList").scrollLeft() - 120,
-            },
-            400,
-          );
-        });
+            /* PRODUCT SCROLL */
+            $("#proLeft").click(function () {
+                $("#productList").animate(
+                    {
+                        scrollLeft: $("#productList").scrollLeft() - 220,
+                    },
+                    400,
+                );
+            });
 
-        $("#catRight").click(function () {
-          $("#categoryList").animate(
-            {
-              scrollLeft: $("#categoryList").scrollLeft() + 120,
-            },
-            400,
-          );
-        });
+            $("#proRight").click(function () {
+                $("#productList").animate(
+                    {
+                        scrollLeft: $("#productList").scrollLeft() + 220,
+                    },
+                    400,
+                );
+            });
 
-        /* PRODUCT SCROLL */
-        $("#proLeft").click(function () {
-          $("#productList").animate(
-            {
-              scrollLeft: $("#productList").scrollLeft() - 220,
-            },
-            400,
-          );
-        });
+            /* RENDER CATEGORIES */
+            const categories = [
+                {
+                    name: "T-Shirts",
+                    img: "../image/tshirt.png",
+                    link: "tshirts.html",
+                },
+                { name: "Blouses", img: "../image/blouse.png", link: "blouses.html" },
+                { name: "Bags", img: "../image/bag.png", link: "bags.html" },
+                { name: "Hats", img: "../image/hat.png", link: "hats.html" },
+                {
+                    name: "Jewelry",
+                    img: "../image/jewelry.png",
+                    link: "jewelry.html",
+                },
+                { name: "Shoes", img: "../image/shoe.png", link: "shoes.html" },
+                { name: "Jeans", img: "../image/bag.png", link: "bags.html" },
+                {
+                    name: "Tech Accesories",
+                    img: "../image/hat.png",
+                    link: "hats.html",
+                },
+                {
+                    name: "Electronic",
+                    img: "../image/clearance.png",
+                    link: "jewelry.html",
+                },
+                { name: "Jeans", img: "../image/bag.png", link: "bags.html" },
+                {
+                    name: "Tech Accesories",
+                    img: "../image/hat.png",
+                    link: "hats.html",
+                },
+                {
+                    name: "Electronic",
+                    img: "../image/clearance.png",
+                    link: "jewelry.html",
+                },
+                { name: "Jeans", img: "../image/bag.png", link: "bags.html" },
+                {
+                    name: "Jewelry",
+                    img: "../image/jewelry.png",
+                    link: "jewelry.html",
+                },
+            ];
 
-        $("#proRight").click(function () {
-          $("#productList").animate(
-            {
-              scrollLeft: $("#productList").scrollLeft() + 220,
-            },
-            400,
-          );
-        });
-
-        /* RENDER CATEGORIES */
-        const categories = [
-          {
-            name: "T-Shirts",
-            img: "../image/tshirt.png",
-            link: "tshirts.html",
-          },
-          { name: "Blouses", img: "../image/blouse.png", link: "blouses.html" },
-          { name: "Bags", img: "../image/bag.png", link: "bags.html" },
-          { name: "Hats", img: "../image/hat.png", link: "hats.html" },
-          {
-            name: "Jewelry",
-            img: "../image/jewelry.png",
-            link: "jewelry.html",
-          },
-          { name: "Shoes", img: "../image/shoe.png", link: "shoes.html" },
-          { name: "Jeans", img: "../image/bag.png", link: "bags.html" },
-          {
-            name: "Tech Accesories",
-            img: "../image/hat.png",
-            link: "hats.html",
-          },
-          {
-            name: "Electronic",
-            img: "../image/clearance.png",
-            link: "jewelry.html",
-          },
-          { name: "Jeans", img: "../image/bag.png", link: "bags.html" },
-          {
-            name: "Tech Accesories",
-            img: "../image/hat.png",
-            link: "hats.html",
-          },
-          {
-            name: "Electronic",
-            img: "../image/clearance.png",
-            link: "jewelry.html",
-          },
-          { name: "Jeans", img: "../image/bag.png", link: "bags.html" },
-          {
-            name: "Jewelry",
-            img: "../image/jewelry.png",
-            link: "jewelry.html",
-          },
-        ];
-
-        $.each(categories, function (index, cat) {
-          let div = $(`
+            $.each(categories, function (index, cat) {
+                let div = $(`
                 <div class="category">
                     <div class="category-box">
                         <img src="${cat.img}">
@@ -222,97 +204,98 @@
                 </div>
             `);
 
-          div.click(function () {
-            window.location.href = cat.link;
-          });
+                div.click(function () {
+                    window.location.href = cat.link;
+                });
 
-          $("#categoryList").append(div);
-        });
+                $("#categoryList").append(div);
+            });
 
-        /* RENDER PRODUCTS */
-        const products = [
-          {
-            name: "Men's Sneakers",
-            price: 89.0,
-            img: "../image/man-sneaker.png",
-            action: "ADD TO CART",
-            link: "product-detail.html?id=1",
-          },
-          {
-            name: "Women's Wristwatch",
-            price: 65.0,
-            img: "../image/woman-watch.png",
-            action: "SELL",
-            link: "product-detail.html?id=2",
-          },
-          {
-            name: "Leather Backpack",
-            price: 110.0,
-            img: "../image/bagpack.jpg",
-            action: "ADD TO CART",
-            link: "product-detail.html?id=3",
-          },
-          {
-            name: "Linen Shirt",
-            price: 45.0,
-            img: "../image/linen.webp",
-            action: "ADD TO CART",
-            link: "product-detail.html?id=4",
-          },
-          {
-            name: "Straw Hat",
-            price: 25.0,
-            img: "../image/strawhat.avif",
-            action: "ADD TO CART",
-            link: "product-detail.html?id=5",
-          },
-          {
-            name: "Women's Wristwatch",
-            price: 65.0,
-            img: "../image/woman-watch.png",
-            action: "SELL",
-            link: "product-detail.html?id=2",
-          },
-          {
-            name: "Men's Sneakers",
-            price: 89.0,
-            img: "../image/man-sneaker.png",
-            action: "ADD TO CART",
-            link: "product-detail.html?id=1",
-          },
-          {
-            name: "Women's Wristwatch",
-            price: 65.0,
-            img: "../image/woman-watch.png",
-            action: "SELL",
-            link: "product-detail.html?id=2",
-          },
-          {
-            name: "Straw Hat",
-            price: 25.0,
-            img: "../image/strawhat.avif",
-            action: "ADD TO CART",
-            link: "product-detail.html?id=5",
-          },
-        ];
+            /* RENDER PRODUCTS */
+            const products = [
+                {
+                    name: "Men's Sneakers",
+                    price: 89.0,
+                    img: "../image/man-sneaker.png",
+                    action: "ADD TO CART",
+                    link: "product-detail.html?id=1",
+                },
+                {
+                    name: "Women's Wristwatch",
+                    price: 65.0,
+                    img: "../image/woman-watch.png",
+                    action: "SELL",
+                    link: "product-detail.html?id=2",
+                },
+                {
+                    name: "Leather Backpack",
+                    price: 110.0,
+                    img: "../image/bagpack.jpg",
+                    action: "ADD TO CART",
+                    link: "product-detail.html?id=3",
+                },
+                {
+                    name: "Linen Shirt",
+                    price: 45.0,
+                    img: "../image/linen.webp",
+                    action: "ADD TO CART",
+                    link: "product-detail.html?id=4",
+                },
+                {
+                    name: "Straw Hat",
+                    price: 25.0,
+                    img: "../image/strawhat.avif",
+                    action: "ADD TO CART",
+                    link: "product-detail.html?id=5",
+                },
+                {
+                    name: "Women's Wristwatch",
+                    price: 65.0,
+                    img: "../image/woman-watch.png",
+                    action: "SELL",
+                    link: "product-detail.html?id=2",
+                },
+                {
+                    name: "Men's Sneakers",
+                    price: 89.0,
+                    img: "../image/man-sneaker.png",
+                    action: "ADD TO CART",
+                    link: "product-detail.html?id=1",
+                },
+                {
+                    name: "Women's Wristwatch",
+                    price: 65.0,
+                    img: "../image/woman-watch.png",
+                    action: "SELL",
+                    link: "product-detail.html?id=2",
+                },
+                {
+                    name: "Straw Hat",
+                    price: 25.0,
+                    img: "../image/strawhat.avif",
+                    action: "ADD TO CART",
+                    link: "product-detail.html?id=5",
+                },
+            ];
 
-        $.each(products, function (index, p) {
-          let div = $(`
+            $.each(products, function (index, p) {
+                let div = $(`
                 <div class="card">
                     <img src="${p.img}">
                     <h4>${p.name}</h4>
                     <div class="price">$${p.price.toFixed(2)}</div>
-                    <button class="btn">ADD TO CART</button>
+                    <button class="btn">ADD TO FAVORITE</button>
                 </div>
             `);
 
-          div.click(function () {
-            window.location.href = p.link;
-          });
+                div.click(function () {
+                    window.location.href = p.link;
+                });
 
-          $("#productList").append(div);
+                $("#productList").append(div);
+            });
         });
-      });
     </script>
-  </body>
+</body>
+
 </html>
