@@ -1,0 +1,23 @@
+name: Auto Sync Fork
+
+on:
+  schedule:
+    - cron: '*/5 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Sync fork with upstream
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh repo sync setmawhtay/Demo_POS_design \
+            --source capital-tinmyowin/Demo_POS_design \
+            --branch main \
+            --force
